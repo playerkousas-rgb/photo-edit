@@ -9,6 +9,7 @@ import {
   Type,
   Frame,
   LayoutGrid,
+  Boxes,
 } from 'lucide-react'
 
 export type ToolId =
@@ -19,6 +20,7 @@ export type ToolId =
   | 'watermark'
   | 'bleed'
   | 'collage'
+  | 'relief'
   | 'svg'
   | 'qrcode'
 
@@ -109,6 +111,17 @@ export const TOOLS: ToolMeta[] = [
     desc: '2×2／3×3 九宮格等多圖拼版，活動相簿一鍵出圖。',
     icon: LayoutGrid,
     accent: 'from-orange-500 to-red-600',
+  },
+  {
+    id: 'relief',
+    to: '/relief',
+    label: '浮雕 3D',
+    shortLabel: '浮雕',
+    en: '3D Relief',
+    desc: '相片／Logo 轉 3D 浮雕，匯出 STL / OBJ 可直接列印。',
+    icon: Boxes,
+    accent: 'from-indigo-500 to-violet-600',
+    badge: '3D',
   },
   {
     id: 'svg',
