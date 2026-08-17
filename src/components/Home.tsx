@@ -41,7 +41,7 @@ export default function Home() {
             </span>
           </h1>
           <p className="text-slate-400 max-w-lg mx-auto text-sm leading-relaxed">
-            列印、私隱打碼、去背、拼圖、出血與向量工具一站完成。
+            列印、私隱打碼、去背、拼圖、出血、3D 浮雕與向量工具一站完成。
           </p>
         </motion.div>
 

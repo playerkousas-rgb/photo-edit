@@ -83,7 +83,7 @@ export default function Layout() {
             reserved.
           </p>
           <p className="text-slate-600 text-center">
-            DPI · 馬賽克 · 去背 · 拼圖 · 出血 · 浮水印 · SVG · QR
+            DPI · 馬賽克 · 去背 · 拼圖 · 出血 · 浮水印 · 浮雕 3D · SVG · QR
           </p>
         </div>
       </footer>
