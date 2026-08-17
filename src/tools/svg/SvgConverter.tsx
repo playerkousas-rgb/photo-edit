@@ -1,6 +1,7 @@
 import { useState, useRef, useCallback, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, Download, Sliders, Layers, Zap, Image as ImageIcon, Trash2, Eye, EyeOff, FileDown, Sparkles, Wand2, Contrast, Droplets } from 'lucide-react';
+import ToolShell from '../../components/ui/ToolShell';
 
 interface ProcessedImage {
   id: string;
@@ -484,58 +485,34 @@ export default function SvgConverter() {
   }, [selectedId, images]);
 
   return (
-    <div className="flex-1 bg-[#02133E] text-white overflow-hidden">
-      {/* Background */}
-      <div className="fixed inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-cyan-900/30 via-transparent to-transparent" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_bottom_right,_var(--tw-gradient-stops))] from-blue-900/20 via-transparent to-transparent" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-cyan-600/15 rounded-full blur-[120px]" />
-        <div className="absolute bottom-0 right-0 w-[600px] h-[600px] bg-sky-500/10 rounded-full blur-[100px]" />
-      </div>
-
-      <div className="relative z-10 flex flex-col h-full min-h-[calc(100vh-7.5rem)]">
-        {/* Header */}
-        <header className="border-b border-white/5 bg-black/20 backdrop-blur-2xl">
-          <div className="px-6 py-4 flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="relative">
-                <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-xl blur opacity-60" />
-                <div className="relative w-10 h-10 rounded-xl bg-[#02133E] flex items-center justify-center border border-white/10">
-                  <Wand2 className="w-5 h-5 text-cyan-400" />
-                </div>
-              </div>
-              <div>
-                <h1 className="text-xl font-medium tracking-tight">向量化提取工具</h1>
-                <p className="text-xs text-zinc-400 -mt-0.5">PNG → SVG 智慧轉換器</p>
-              </div>
-            </div>
-
-            <div className="flex items-center gap-3">
-              <div className="hidden md:block text-[11px] text-zinc-600 mr-2">© 2026 Scout System</div>
-              {images.length > 0 && (
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  onClick={downloadAll}
-                  className="px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 text-sm flex items-center gap-2 transition-colors"
-                >
-                  <FileDown className="w-4 h-4" />
-                  批量下載
-                </motion.button>
-              )}
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                onClick={() => fileInputRef.current?.click()}
-                className="px-4 py-2 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 text-sm font-medium flex items-center gap-2 shadow-lg shadow-cyan-900/30"
-              >
-                <Upload className="w-4 h-4" />
-                上傳圖片
-              </motion.button>
-            </div>
-          </div>
-        </header>
-
+    <ToolShell
+      icon={Wand2}
+      title="SVG 向量轉換"
+      subtitle="PNG → SVG · 中心線 / 輪廓 · Scout System"
+      accentClass="from-cyan-500 to-blue-600"
+      fullBleed
+      actions={
+        <>
+          {images.length > 0 && (
+            <button
+              onClick={downloadAll}
+              className="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-xs flex items-center gap-1.5"
+            >
+              <FileDown className="w-3.5 h-3.5" />
+              批量下載
+            </button>
+          )}
+          <button
+            onClick={() => fileInputRef.current?.click()}
+            className="px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 text-xs font-medium flex items-center gap-1.5"
+          >
+            <Upload className="w-3.5 h-3.5" />
+            上傳
+          </button>
+        </>
+      }
+    >
+    <div className="flex-1 bg-slate-950 text-white overflow-hidden h-[calc(100vh-8.5rem)] flex flex-col">
         <div className="flex-1 flex overflow-hidden">
           {/* Sidebar - Images */}
           <div className="w-[280px] border-r border-white/5 bg-black/40 backdrop-blur-xl flex flex-col">
@@ -921,7 +898,6 @@ export default function SvgConverter() {
             )}
           </div>
         </div>
-      </div>
 
       <input
         ref={fileInputRef}
@@ -933,5 +909,6 @@ export default function SvgConverter() {
       />
       <canvas ref={canvasRef} className="hidden" />
     </div>
+    </ToolShell>
   );
 }

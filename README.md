@@ -1,24 +1,34 @@
 # Scout System · Photo Edit Toolkit
 
-整合多個圖像工具的統一工作台，由 **Scout System** 開發維護。
+整合圖像工具的統一工作台，由 **Scout System** 開發維護。  
+**DPI 列印** 為核心常用工具，專為 AI 生成圖轉實體印刷設計。
 
-## 內建工具
+## 工具一覽
 
 | 工具 | 路徑 | 說明 |
 |------|------|------|
-| **SVG 向量轉換** | `/svg` | PNG/JPEG → SVG，中心線 / 輪廓提取 |
-| **去背 + 換背景** | `/background` | 一鍵去背，透明 / 純色 / 漸層 / 背景圖 |
-| **QR Code / 條碼** | `/qrcode` | 高度自訂 QR 與條碼，多模板、SVG/PNG 導出 |
-| **DPI / 列印尺寸** | `/dpi` | 設定 DPI 與實際列印尺寸，匯出含 pHYs 的 PNG |
+| **DPI 列印** ⭐ | `/dpi` | AI 圖 → 設定 DPI / 實際 cm，品質診斷，PNG pHYs 匯出、批次 |
+| **去背換底** | `/background` | 四角取色去背、靈敏度／柔邊、純色／漸層／背景圖 |
+| **裁切縮放** | `/resize` | 比例裁切、旋轉翻轉、像素輸出 |
+| **SVG 向量** | `/svg` | PNG/JPEG → SVG，中心線／輪廓 |
+| **QR / 條碼** | `/qrcode` | 自訂 QR 與條碼、多模板 |
 
-## 來源專案
+## 建議工作流（AI 圖列印）
 
-本倉庫整合自：
+1. **去背** — 清掉雜亂背景  
+2. **裁切** — 對齊目標比例（A4、1:1…）  
+3. **DPI 列印** — 選「AI→A4 300」→ 看品質燈號 → 匯出 PNG  
 
-- [SVG-converter](https://github.com/playerkousas-rgb/SVG-converter)
-- [backgound](https://github.com/playerkousas-rgb/backgound)
-- [Qrcode](https://github.com/playerkousas-rgb/Qrcode)
-- DPI Maker（原 `dpi_maker` 倉庫無法存取，已於本專案重新實作）
+## DPI 重點功能
+
+- 工作模式：**依尺寸重採樣** / **只改 DPI 標籤**（不破壞像素）
+- AI 快速預設：A4 直/橫 300、相紙 4×6、只改標籤
+- 紙張預設：A3–A6、名片、相紙、徽章、貼紙
+- **列印品質診斷**（有效 DPI ≥300 / 200 / 150）
+- 放大輸出警告（避免軟體瞎放大）
+- 批次上傳與批次匯出
+- PNG **pHYs** 嵌入（Photoshop / 印刷流程可讀）
+- JPEG 選項（提醒：JPEG 不適合可靠嵌 DPI）
 
 ## 開發
 
@@ -34,17 +44,10 @@ npm run preview
 
 ## 技術棧
 
-- React 19 + TypeScript
-- Vite 7
-- Tailwind CSS 4
-- Framer Motion
-- react-router-dom
-- qr-code-styling / jsbarcode
+React 19 · TypeScript · Vite 7 · Tailwind CSS 4 · Framer Motion · react-router-dom
 
 ## Copyright
 
 ```
 © 2026 Scout System. All rights reserved.
 ```
-
-本工具集由 Scout System 開發與維護，僅供童軍及相關教育用途使用。

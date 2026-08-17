@@ -1,28 +1,13 @@
 import { NavLink, Outlet } from 'react-router-dom'
-import {
-  Wand2,
-  ImageMinus,
-  QrCode,
-  Ruler,
-  Home,
-  Shield,
-} from 'lucide-react'
-
-const navItems = [
-  { to: '/', label: '首頁', icon: Home, end: true },
-  { to: '/svg', label: 'SVG 轉換', icon: Wand2 },
-  { to: '/background', label: '去背工具', icon: ImageMinus },
-  { to: '/qrcode', label: 'QR / 條碼', icon: QrCode },
-  { to: '/dpi', label: 'DPI 工具', icon: Ruler },
-]
+import { Home, Shield } from 'lucide-react'
+import { TOOLS } from '../lib/tools'
 
 export default function Layout() {
   return (
     <div className="min-h-screen bg-slate-950 text-white flex flex-col">
-      {/* Top navigation */}
-      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#02133E]/90 backdrop-blur-xl">
-        <div className="mx-auto max-w-[1600px] px-4 sm:px-6">
-          <div className="h-14 flex items-center justify-between gap-4">
+      <header className="sticky top-0 z-50 border-b border-white/5 bg-[#02133E]/95 backdrop-blur-xl">
+        <div className="mx-auto max-w-[1600px] px-3 sm:px-5">
+          <div className="h-13 sm:h-14 flex items-center justify-between gap-3">
             <NavLink to="/" className="flex items-center gap-2.5 shrink-0 group">
               <div className="relative">
                 <div className="absolute -inset-1 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-lg blur opacity-50 group-hover:opacity-70 transition-opacity" />
@@ -40,46 +25,68 @@ export default function Layout() {
               </div>
             </NavLink>
 
-            <nav className="flex items-center gap-1 overflow-x-auto custom-scrollbar">
-              {navItems.map(({ to, label, icon: Icon, end }) => (
+            <nav className="flex items-center gap-0.5 sm:gap-1 overflow-x-auto custom-scrollbar max-w-full">
+              <NavLink
+                to="/"
+                end
+                className={({ isActive }) =>
+                  `flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+                    isActive
+                      ? 'bg-white/10 text-white border border-white/15'
+                      : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
+                  }`
+                }
+              >
+                <Home className="w-3.5 h-3.5" />
+                <span className="hidden md:inline">首頁</span>
+              </NavLink>
+
+              {TOOLS.map(({ to, label, shortLabel, icon: Icon, featured }) => (
                 <NavLink
                   key={to}
                   to={to}
-                  end={end}
                   className={({ isActive }) =>
-                    `flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+                    `relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
                       isActive
-                        ? 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
+                        ? featured
+                          ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/35'
+                          : 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
                         : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
                     }`
                   }
                 >
                   <Icon className="w-3.5 h-3.5" />
-                  <span className="hidden md:inline">{label}</span>
+                  <span className="hidden lg:inline">{label}</span>
+                  <span className="lg:hidden">{shortLabel}</span>
+                  {featured && (
+                    <span className="hidden xl:inline ml-0.5 text-[9px] px-1 py-px rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
+                      常用
+                    </span>
+                  )}
                 </NavLink>
               ))}
             </nav>
 
-            <div className="hidden lg:block text-[10px] text-slate-500 font-mono shrink-0">
+            <div className="hidden xl:block text-[10px] text-slate-500 font-mono shrink-0">
               © 2026 Scout System
             </div>
           </div>
         </div>
       </header>
 
-      {/* Page content */}
       <main className="flex-1 flex flex-col min-h-0">
         <Outlet />
       </main>
 
-      {/* Global footer */}
-      <footer className="border-t border-white/5 bg-black/30 py-3 px-4">
-        <div className="mx-auto max-w-[1600px] flex flex-col sm:flex-row items-center justify-between gap-2 text-[11px] text-slate-500">
+      <footer className="shrink-0 border-t border-white/5 bg-black/40 py-2.5 px-4">
+        <div className="mx-auto max-w-[1600px] flex flex-col sm:flex-row items-center justify-between gap-1.5 text-[11px] text-slate-500">
           <p>
-            © 2026 <span className="text-slate-400 font-medium">Scout System</span>. All rights reserved.
+            © 2026{' '}
+            <span className="text-slate-400 font-medium">Scout System</span>. All rights
+            reserved.
           </p>
-          <p className="text-slate-600">
-            SVG Converter · Background Remover · QR Code · DPI Maker
+          <p className="text-slate-600 text-center">
+            DPI 列印 · 去背 · 裁切 · SVG · QR Code
           </p>
         </div>
       </footer>
