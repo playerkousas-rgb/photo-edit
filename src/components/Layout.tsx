@@ -25,12 +25,12 @@ export default function Layout() {
               </div>
             </NavLink>
 
-            <nav className="flex items-center gap-0.5 sm:gap-1 overflow-x-auto custom-scrollbar max-w-full">
+            <nav className="flex-1 flex items-center gap-0.5 overflow-x-auto custom-scrollbar min-w-0 px-1">
               <NavLink
                 to="/"
                 end
                 className={({ isActive }) =>
-                  `flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+                  `flex items-center gap-1 px-2 py-1.5 rounded-lg text-[11px] font-medium whitespace-nowrap transition-colors shrink-0 ${
                     isActive
                       ? 'bg-white/10 text-white border border-white/15'
                       : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
@@ -38,31 +38,28 @@ export default function Layout() {
                 }
               >
                 <Home className="w-3.5 h-3.5" />
-                <span className="hidden md:inline">首頁</span>
+                <span className="hidden xl:inline">首頁</span>
               </NavLink>
 
-              {TOOLS.map(({ to, label, shortLabel, icon: Icon, featured }) => (
+              {TOOLS.map(({ to, shortLabel, icon: Icon, featured, id }) => (
                 <NavLink
                   key={to}
                   to={to}
+                  title={shortLabel}
                   className={({ isActive }) =>
-                    `relative flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium whitespace-nowrap transition-colors ${
+                    `relative flex items-center gap-1 px-2 py-1.5 rounded-lg text-[11px] font-medium whitespace-nowrap transition-colors shrink-0 ${
                       isActive
                         ? featured
                           ? 'bg-emerald-500/15 text-emerald-300 border border-emerald-500/35'
-                          : 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
+                          : id === 'mosaic'
+                            ? 'bg-sky-500/15 text-sky-300 border border-sky-500/35'
+                            : 'bg-cyan-500/15 text-cyan-300 border border-cyan-500/30'
                         : 'text-slate-400 hover:text-white hover:bg-white/5 border border-transparent'
                     }`
                   }
                 >
                   <Icon className="w-3.5 h-3.5" />
-                  <span className="hidden lg:inline">{label}</span>
-                  <span className="lg:hidden">{shortLabel}</span>
-                  {featured && (
-                    <span className="hidden xl:inline ml-0.5 text-[9px] px-1 py-px rounded bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">
-                      常用
-                    </span>
-                  )}
+                  <span className="hidden md:inline">{shortLabel}</span>
                 </NavLink>
               ))}
             </nav>
@@ -86,7 +83,7 @@ export default function Layout() {
             reserved.
           </p>
           <p className="text-slate-600 text-center">
-            DPI 列印 · 去背 · 裁切 · SVG · QR Code
+            DPI · 馬賽克 · 去背 · 拼圖 · 出血 · 浮水印 · SVG · QR
           </p>
         </div>
       </footer>

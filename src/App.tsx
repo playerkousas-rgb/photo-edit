@@ -6,6 +6,10 @@ import BackgroundTool from './tools/background/BackgroundTool'
 import QrTool from './tools/qr/QrTool'
 import DpiTool from './tools/dpi/DpiTool'
 import ResizeTool from './tools/resize/ResizeTool'
+import MosaicTool from './tools/mosaic/MosaicTool'
+import WatermarkTool from './tools/watermark/WatermarkTool'
+import BleedTool from './tools/bleed/BleedTool'
+import CollageTool from './tools/collage/CollageTool'
 
 export default function App() {
   return (
@@ -13,11 +17,14 @@ export default function App() {
       <Route element={<Layout />}>
         <Route index element={<Home />} />
         <Route path="dpi" element={<DpiTool />} />
+        <Route path="mosaic" element={<MosaicTool />} />
         <Route path="background" element={<BackgroundTool />} />
         <Route path="resize" element={<ResizeTool />} />
+        <Route path="watermark" element={<WatermarkTool />} />
+        <Route path="bleed" element={<BleedTool />} />
+        <Route path="collage" element={<CollageTool />} />
         <Route path="svg" element={<SvgConverter />} />
         <Route path="qrcode" element={<QrTool />} />
-        {/* legacy aliases */}
         <Route path="print" element={<Navigate to="/dpi" replace />} />
       </Route>
     </Routes>
